@@ -7,13 +7,13 @@
 
 
 
-* لطفا با دستور زیر کتابخانه های مورد نظر و استفاده شده در این پروژه را نصب کنید
+* لطفا با دستور زیر کتابخانه های مورد نظر و استفاده شده در این پروژه را نصب کنید.
 ```python 
 pip install -r requirements.txt
 pip install torch==2.3.0 torchvision==0.18.0 torchaudio==2.3.0 --index-url https://download.pytorch.org/whl/cu121
 ```
 
-لطفا تصاویر داده های این پروژه را از این [link](https://www.kaggle.com/datasets/emadmous/elpv-and-pvel-ad-dataset) دانلود کرده و ترتیب آن را به صورت زیر تنظیم کنید:
+لطفا تصاویر داده های این پروژه را از این لینک(https://www.kaggle.com/datasets/emadmous/elpv-and-pvel-ad-dataset) دانلود کرده و ترتیب آن را به صورت زیر تنظیم کنید:
 
 
 ```
@@ -35,16 +35,16 @@ FDFNet
 ## TRAIN
 
 
-* برای آموزش مدل کد زیر را اجرا کنید
+* برای آموزش مدل کد زیر را اجرا کنید.
 ```python 
 python train.py --cfg_file config/FDFNet.yaml
 ```
-نتایج این بخش در آدرس زیر ذخیره می شود
+نتایج این بخش در آدرس زیر ذخیره می شود.
 
 ```commandline
 output/FDFNet/default
 ```
- ``` config/FDFNet.yaml ``` در فایل مذکور اطلاعات آموزشی و معماری مدل و آدرس های داده ها قرار گرفته شده است
+ در فایل  ``` config/FDFNet.yaml ``` اطلاعات آموزشی و معماری مدل و آدرس های داده ها قرار گرفته شده است.
 
 
 * در آدرس زیر نیز وزن های مدل ذخیره می‌شود.

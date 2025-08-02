@@ -91,7 +91,7 @@ def main():
         criterion = nn.CrossEntropyLoss(weight=class_weights)
 
         train_model(
-            args=args,
+            mode=mod,
             dataloader=loader,
             val_dataloader=val_loader,
             network=network,
@@ -108,4 +108,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-

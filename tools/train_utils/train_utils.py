@@ -5,7 +5,7 @@ import sklearn.metrics as metric
 from tqdm import tqdm
 
 
-def train_model(args, dataloader, val_dataloader, network, start_epoch, num_epoch, device,
+def train_model(mode, dataloader, val_dataloader, network, start_epoch, num_epoch, device,
                 scheduler, criterion, optimizer, output_path, max_time=None):
 
     epoch_losses_train = []
@@ -84,15 +84,15 @@ def train_model(args, dataloader, val_dataloader, network, start_epoch, num_epoc
 
         if f1_weighted > best_f1_weighted:
             print("############ Best Result f1_weighted ############")
-            print(metric.classification_report(t, p))
-            out_filename = output_path / 'best_f1_weighted.pth'
+            print(metric.classification_report(t, p, zero_division=0.0))
+            out_filename = output_path / f'best_f1_weighted_{mode}.pth'
             torch.save(network.state_dict(), out_filename)
             best_f1_weighted = f1_weighted
 
         if f1_binary > best_f1_binary:
             print("############ Best Result f1_binary ############")
-            print(metric.classification_report(t, p))
-            out_filename = output_path / 'best_f1_binary.pth'
+            print(metric.classification_report(t, p, zero_division=0.0))
+            out_filename = output_path / f'best_f1_binary_{mode}.pth'
             torch.save(network.state_dict(), out_filename)
             best_f1_binary = f1_binary
 
@@ -101,7 +101,7 @@ def train_model(args, dataloader, val_dataloader, network, start_epoch, num_epoc
         if max_time is not None:
             if forward_time > max_time:
                 print(f"############ last=> epoch {epoch} time :{forward_time} ############")
-                print(metric.classification_report(t, p))
-                out_filename = output_path / 'last_weights.pth'
+                print(metric.classification_report(t, p, zero_division=0.0))
+                out_filename = output_path / f'last_weights_{mode}.pth'
                 torch.save(network.state_dict(), out_filename)
                 break

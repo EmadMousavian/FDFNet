@@ -13,7 +13,7 @@ pip install -r requirements.txt
 pip install torch==2.3.0 torchvision==0.18.0 torchaudio==2.3.0 --index-url https://download.pytorch.org/whl/cu121
 ```
 
-لطفا تصاویر داده های این پروژه را از این لینک(https://www.kaggle.com/datasets/emadmous/elpv-and-pvel-ad-dataset) دانلود کرده و ترتیب آن را به صورت زیر تنظیم کنید:
+لطفا تصاویر داده های این پروژه را از این [لینک](https://www.kaggle.com/datasets/emadmous/elpv-and-pvel-ad-dataset) دانلود کرده و ترتیب آن را به صورت زیر تنظیم کنید:
 
 
 ```

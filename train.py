@@ -95,7 +95,6 @@ def main():
             dataloader=loader,
             val_dataloader=val_loader,
             network=network,
-            build_dataloader=build_dataloader,
             start_epoch=start_epoch,
             num_epoch=args.epochs,
             device=device,
@@ -109,3 +108,4 @@ def main():
 
 if __name__ == '__main__':
     main()
+

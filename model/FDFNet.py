@@ -2,7 +2,13 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
-
+model_urls = {
+    'ResNet18': 'https://download.pytorch.org/models/resnet18-5c106cde.pth',
+    'ResNet34': 'https://download.pytorch.org/models/resnet34-333f7ec4.pth',
+    'ResNet50': 'https://download.pytorch.org/models/resnet50-19c8e357.pth',
+    'ResNet101': 'https://download.pytorch.org/models/resnet101-5d3b4d8f.pth',
+    'ResNet152': 'https://download.pytorch.org/models/resnet152-b121ed2d.pth',
+}
 
 def set_random_seed(seed):
     torch.manual_seed(seed)
@@ -131,7 +137,7 @@ class DCMAF(nn.Module):
 
 
 class ResNet(nn.Module):
-    def __init__(self, block, layers, num_classes=2, pretrained_path=None, mode='train'):
+    def __init__(self, block, layers, num_classes=2, pretrained_url=None, mode='train'):
 
         super(ResNet, self).__init__()
         # orginal image
@@ -175,8 +181,8 @@ class ResNet(nn.Module):
             nn.Linear(256, num_classes)
         )
 
-        if isinstance(pretrained_path, str) and mode == 'train':
-            self.pretrained_path = pretrained_path
+        if isinstance(pretrained_url, str) and mode == 'train':
+            self.pretrained_url = pretrained_url
             self._load_resnet_pretrained()
             print("********************** Pretrained model loaded **********************")
 
@@ -198,7 +204,8 @@ class ResNet(nn.Module):
         return nn.Sequential(*layers)
 
     def _load_resnet_pretrained(self):
-        pretrain_dict = torch.load(self.pretrained_path)
+        # pretrain_dict = torch.load(self.pretrained_path)
+        pretrain_dict = model_zoo.load_url(self.pretrained_url)
         model_dict = {}
         state_dict = self.state_dict()
         for k, v in pretrain_dict.items():
@@ -271,6 +278,6 @@ class ResNet(nn.Module):
 def build_network(model_cfg, mode='train'):
     model = ResNet(
         block=BasicBlock, layers=model_cfg.LAYERS , num_classes=model_cfg.NUM_CLASSES,
-        pretrained_path=model_cfg.pretrained_PATH, mode=mode
+        pretrained_url=model_urls[model_cfg.NAME], mode=mode
     )
     return model

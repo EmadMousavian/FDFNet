@@ -137,7 +137,7 @@ class DCMAF(nn.Module):
 
 
 class ResNet(nn.Module):
-    def __init__(self, block, layers, num_classes=2, pretrained_url=None, mode='train'):
+    def __init__(self, block, layers, num_classes=2, pretrained_url=None, pretrained=True, mode='train'):
 
         super(ResNet, self).__init__()
         # orginal image
@@ -181,7 +181,7 @@ class ResNet(nn.Module):
             nn.Linear(256, num_classes)
         )
 
-        if isinstance(pretrained_url, str) and mode == 'train':
+        if isinstance(pretrained_url, str) and mode == 'train' and pretrained == True:
             self.pretrained_url = pretrained_url
             self._load_resnet_pretrained()
             print("********************** Pretrained model loaded **********************")
@@ -278,6 +278,6 @@ class ResNet(nn.Module):
 def build_network(model_cfg, mode='train'):
     model = ResNet(
         block=BasicBlock, layers=model_cfg.LAYERS , num_classes=model_cfg.NUM_CLASSES,
-        pretrained_url=model_urls[model_cfg.NAME], mode=mode
+        pretrained_url=model_urls[model_cfg.NAME], pretrained=False, mode=mode
     )
     return model
